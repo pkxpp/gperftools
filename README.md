@@ -1,5 +1,5 @@
 # gperftools
-----------
+
 (originally Google Performance Tools)
 
 The fastest malloc we’ve seen; works particularly well with threads
@@ -7,8 +7,7 @@ and STL. Also: thread-friendly heap-checker, heap-profiler, and
 cpu-profiler.
 
 
-# OVERVIEW
----------
+## OVERVIEW
 
 gperftools is a collection of a high-performance multi-threaded
 malloc() implementation, plus some pretty nifty performance analysis
@@ -23,8 +22,7 @@ original pprof (which is still included with gperftools) is now
 deprecated in favor of golang version at https://github.com/google/pprof
 
 
-# TCMALLOC
---------
+## TCMALLOC
 Just link in -ltcmalloc or -ltcmalloc_minimal to get the advantages of
 tcmalloc -- a replacement for malloc and new.  See below for some
 environment variables you can use with tcmalloc, as well.
@@ -47,8 +45,8 @@ lowest for folks who use tcmalloc_minimal (or, of course, who pass in
 the above flags :-) ).
 
 
-# HEAP PROFILER
--------------
+## HEAP PROFILER
+
 See docs/heap-profiler.html for information about how to use tcmalloc's
 heap profiler and analyze its output.
 
@@ -73,7 +71,7 @@ see INSTALL for more details.  It is not currently available on Windows.
 
 
 # HEAP CHECKER
-------------
+
 See docs/heap-checker.html for information about how to use tcmalloc's
 heap checker.
 
@@ -101,7 +99,7 @@ for more details.
 
 
 # CPU PROFILER
-------------
+
 See docs/cpu-profiler.html for information about how to use the CPU
 profiler and analyze its output.
 
@@ -128,8 +126,8 @@ NOTE: CPU profiling doesn't work after fork (unless you immediately
       (hopefully perftools 1.2).
 
 
-# EVERYTHING IN ONE
------------------
+## EVERYTHING IN ONE
+
 If you want the CPU profiler, heap profiler, and heap leak-checker to
 all be available for your application, you can do:
    gcc -o myapp ... -lprofiler -ltcmalloc
@@ -143,16 +141,16 @@ make for just this purpose:
    gcc -o myapp ... /usr/lib/libtcmalloc_and_profiler.a
 
 
-# CONFIGURATION OPTIONS
----------------------
+## CONFIGURATION OPTIONS
+
 For advanced users, there are several flags you can pass to
 './configure' that tweak tcmalloc performace.  (These are in addition
 to the environment variables you can set at runtime to affect
 tcmalloc, described below.)  See the INSTALL file for details.
 
 
-# ENVIRONMENT VARIABLES
----------------------
+## ENVIRONMENT VARIABLES
+
 The cpu profiler, heap checker, and heap profiler will lie dormant,
 using no memory or CPU, until you turn them on.  (Thus, there's no
 harm in linking -lprofiler into every application, and also -ltcmalloc
@@ -163,16 +161,17 @@ environment variables.  We have several variables that let you
 enable/disable features as well as tweak parameters.
 
 Here are some of the most important variables:
-
-HEAPPROFILE=<pre> -- turns on heap profiling and dumps data using this prefix
-HEAPCHECK=<type>  -- turns on heap checking with strictness 'type'
-CPUPROFILE=<file> -- turns on cpu profiling and dumps data to this file.
-PROFILESELECTED=1 -- if set, cpu-profiler will only profile regions of code
+```Bash
+    HEAPPROFILE=<pre> -- turns on heap profiling and dumps data using this prefix
+    HEAPCHECK=<type>  -- turns on heap checking with strictness 'type'
+    CPUPROFILE=<file> -- turns on cpu profiling and dumps data to this file.
+    PROFILESELECTED=1 -- if set, cpu-profiler will only profile regions of code
                      surrounded with ProfilerEnable()/ProfilerDisable().
-CPUPROFILE_FREQUENCY=x-- how many interrupts/second the cpu-profiler samples.
+    CPUPROFILE_FREQUENCY=x-- how many interrupts/second the cpu-profiler samples.
 
-PERFTOOLS_VERBOSE=<level> -- the higher level, the more messages malloc emits
-MALLOCSTATS=<level>    -- prints memory-use stats at program-exit
+    PERFTOOLS_VERBOSE=<level> -- the higher level, the more messages malloc emits
+    MALLOCSTATS=<level>    -- prints memory-use stats at program-exit
+```
 
 For a full list of variables, see the documentation pages:
    docs/cpuprofile.html
@@ -180,8 +179,7 @@ For a full list of variables, see the documentation pages:
    docs/heap_checker.html
 
 
-# COMPILING ON NON-LINUX SYSTEMS
-------------------------------
+## COMPILING ON NON-LINUX SYSTEMS
 
 Perftools was developed and tested on x86 Linux systems, and it works
 in its full generality only on those systems.  However, we've
@@ -191,8 +189,7 @@ functionality in tcmalloc_minimal to Windows.  See INSTALL for details.
 See README_windows.txt for details on the Windows port.
 
 
-# PERFORMANCE
------------
+## PERFORMANCE
 
 If you're interested in some third-party comparisons of tcmalloc to
 other malloc libraries, here are a few web pages that have been
@@ -208,8 +205,7 @@ fragmentation (that is, more unusable memory on your system).  See the
 INSTALL file for details.
 
 
-# OLD SYSTEM ISSUES
------------------
+## OLD SYSTEM ISSUES
 
 When compiling perftools on some old systems, like RedHat 8, you may
 get an error like this:
@@ -223,8 +219,7 @@ that error.  To fix it, just comment out (or delete) the line
 in your config.h file before building.
 
 
-# 64-BIT ISSUES
--------------
+## 64-BIT ISSUES
 
 There are two issues that can cause program hangs or crashes on x86_64
 64-bit systems, which use the libunwind library to get stack-traces.
